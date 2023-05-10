@@ -15,6 +15,9 @@ class Profile(models.Model):
     profileimage = models.ImageField(upload_to = 'profileimages', blank=True)
     rdoc = models.FileField(upload_to='rdocs', blank=True)
 
+    def __str__(self):
+         return self.name
+
 class Product(models.Model):
     ProductId = models.AutoField(primary_key=True)
     ProductName = models.CharField(max_length=200)
