@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from api.models import Products
+from api.models import Product
 from api.serializers import ProductSerializer
 
 from django.core.files.storage import default_storage
@@ -12,7 +12,7 @@ from django.core.files.storage import default_storage
 @csrf_exempt
 def productApi(request, id=0):
     if request.method == 'GET':
-        products = Products.objects.all()
+        products = Product.objects.all()
         products_serilizer = ProductSerializer(products, many=True)
         return JsonResponse(products_serilizer.data, safe=False)
     elif request.method == 'POST':
@@ -24,14 +24,14 @@ def productApi(request, id=0):
         return JsonResponse("Failed to add product!", safe=False)
     elif request.method == 'PUT':
         product_data = JSONParser().parse(request)
-        product = Products.objects.get(ProductId=product_data['ProductId'])
+        product = Product.objects.get(ProductId=product_data['ProductId'])
         product_serializer = ProductSerializer(product,data=product_data)
         if product_serializer.is_valid():
             product_serializer.save()
             return JsonResponse("Updated successfully!", safe=False)
         return JsonResponse("Failed to update!", safe=False)
     elif request.method == 'DELETE':
-        product = Products.objects.get(ProductId=id)
+        product = Product.objects.get(ProductId=id)
         product.delete()
         return JsonResponse("Deleted Successfully!", safe=False)
 

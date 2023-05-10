@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from api.models import Products
+from api.models import Product
 
 class ProductSerializer(serializers.ModelSerializer):
     ProductImages = serializers.ListField(
         child=serializers.ImageField(), allow_empty=True
     )
     class Meta:
-        model = Products
+        model = Product
         fields = ('ProductId','ProductName','ProductCategory','ProductPrice','ProductImages')
 
     def create(self, validated_data):
