@@ -4,3 +4,11 @@ django-filter
 django-cors-headers
 Pillow
 django
+asgiref
+django-extensions
+djangorestframework-jsonapi
+inflection
+python-dotenv
+pytz
+sqlparse
+tzdata
