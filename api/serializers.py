@@ -1,5 +1,19 @@
 from rest_framework import serializers
-from api.models import Product
+from .models import Product, Contact
+from rest_framework.fields import CharField, EmailField
+
+class ContactSerializer(serializers.ModelSerializer):
+    name = CharField(source="title", required=True)
+    message = CharField(source="description", required=True)
+    email = EmailField(required=True)
+
+    class Meta:
+        model = Contact
+        fields = (
+            'name',
+            'email',
+            'message'
+        )
 
 class ProductSerializer(serializers.ModelSerializer):
     ProductImages = serializers.ListField(
